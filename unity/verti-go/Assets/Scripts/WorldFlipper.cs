@@ -6,7 +6,7 @@ public class WorldFlipper : MonoBehaviour {
 
 	private float targetAngle = 180.0f;
 
-	private Vector3 flipAbout;
+	private GameObject flipSensor;
 	private float currentAngle;
 	private bool flipping;
 
@@ -15,9 +15,9 @@ public class WorldFlipper : MonoBehaviour {
 		flipping = false;
 	}
 
-	public void Flip(Vector3 newOrigin) {
+	public void Flip(GameObject sensorObject) {
 		if (flipping) return;
-		flipAbout = newOrigin;
+		flipSensor = sensorObject;
 		flipping = true;
 		currentAngle = 0.0f;
 	}
@@ -29,9 +29,18 @@ public class WorldFlipper : MonoBehaviour {
 		float newAngle = currentAngle + turnSpeed * Time.deltaTime;
 		if (newAngle >= targetAngle) newAngle = targetAngle;
 		float amtToRotate = newAngle - currentAngle;
-		
-		transform.RotateAround(flipAbout, Vector3.forward, amtToRotate);
-		
+
+		// Flip the world
+		Vector3 origin = flipSensor.transform.position;
+		transform.RotateAround(origin, Vector3.forward, amtToRotate);
+		// Flip additional flippable things
+		GameObject[] additionalFlips = GameObject.FindGameObjectsWithTag("AdditionalFlip");
+		foreach (GameObject additionalFlip in additionalFlips) {
+			if (additionalFlip != flipSensor) {
+				additionalFlip.transform.RotateAround(origin, Vector3.forward, amtToRotate);
+			}
+		}
+
 		currentAngle = newAngle;
 		if (currentAngle >= targetAngle) {
 			flipping = false;

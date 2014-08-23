@@ -13,7 +13,7 @@ public class FlipSensor : MonoBehaviour {
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject == player) {
-			flipper.Flip(transform.position);
+			flipper.Flip(gameObject);
 		}
 	}
 }
