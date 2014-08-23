@@ -20,7 +20,7 @@ public class Exit : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag("Player");
 		score = player.GetComponent<Score>();
 
-		indicator = transform.parent.FindChild("Indicator").GetComponent<TextMesh>();
+		indicator = transform.FindChild("Indicator").GetComponent<TextMesh>();
 
 		bonus = maxBonus;
 		bonusPoints = (int)bonus;
@@ -28,7 +28,7 @@ public class Exit : MonoBehaviour {
 	}
 
 	void UpdateIndicator() {
-		System.String text = System.String.Format("{0:00000}", bonusPoints);
+		System.String text = System.String.Format("{0}", bonusPoints);
 		indicator.text = text;
 	}
 

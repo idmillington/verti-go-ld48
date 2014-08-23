@@ -11,13 +11,18 @@ ExportedObj/
 obj/
 *.svd
 *.userprefs
-/*.csproj
+*.csproj
 *.pidb
 *.suo
-/*.sln
+*.sln
 *.user
 *.unityproj
 *.booproj
+
+=======
+Blender
+=======
+*.blend[0-9]*
 
 ============
 OS generated

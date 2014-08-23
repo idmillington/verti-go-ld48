@@ -2,36 +2,46 @@
 using System.Collections;
 
 public class Score : MonoBehaviour {
-	public int score;
-	public Texture logo;
+	public AudioClip loseSound;
+	public AudioClip winSound;
+
+	public System.String nextLevel = "Game Won";
+	public bool zeroScore = false;
+	public GUIText scoreDisplay;
+
+	private int score;
 
 	// Use this for initialization
 	void Start () {
-		score = 0;
+		if (zeroScore) {
+			score = 0;
+			UpdateScore();
+		} else {
+			score = PlayerPrefs.GetInt("Score", 0);
+		}
 	}
 
 	public void AddPoints(int points) {
 		score += points;
+		UpdateScore();
+	}
+
+	void UpdateScore() {
+		scoreDisplay.text = System.String.Format("{0}", score);
+		PlayerPrefs.SetInt("Score", score);
+		if (score > PlayerPrefs.GetInt("Best Score", 0)) {
+			PlayerPrefs.SetInt("Best Score", score);
+		}
 	}
 
 	public void Win() {
-		Debug.Log("Won");
+		if (winSound) AudioSource.PlayClipAtPoint(winSound, transform.position);
+		Application.LoadLevel(nextLevel);
 	}
 
 	public void Lose() {
-		Debug.Log("Lost");
+		if (loseSound) AudioSource.PlayClipAtPoint(loseSound, transform.position);
+		Application.LoadLevel("Game Over");
 	}
 
-	void OnGUI() {
-		GUI.skin.box.fontSize = GUI.skin.label.fontSize = 20;
-		GUIStyle noborderStyle = new GUIStyle(GUI.skin.label);
-		noborderStyle.border = new RectOffset(0, 0, 0, 0);
-		noborderStyle.margin = new RectOffset(0, 0, 0, 0);
-		
-		GUI.Box(new Rect(20, 20, 150, 30), "SCORE: "+score);
-
-		int logoHeight = 40;
-		int logoWidth = logoHeight * 4;
-		GUI.Box(new Rect(Screen.width-logoWidth, 20, logoWidth, logoHeight), logo, noborderStyle);
-	}
 }
