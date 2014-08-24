@@ -9,7 +9,7 @@ public class BobAndRotate : MonoBehaviour {
 	private Vector3 origin;
 	private float bobOffset;
 	
-	void Awake() {
+	void Start() {
 		bobOffset = Random.value * 360f / bobSpeed;			
 		origin = transform.localPosition;
 	}

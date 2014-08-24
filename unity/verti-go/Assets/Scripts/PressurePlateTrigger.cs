@@ -8,7 +8,7 @@ public class PressurePlateTrigger : MonoBehaviour {
 	private GameObject player;
 	private PlatformTurn platformTurn;
 
-	void Awake () {
+	void Start() {
 		player = GameObject.FindGameObjectWithTag("Player");
 		platformTurn = platform.GetComponent<PlatformTurn>();
 	}

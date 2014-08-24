@@ -8,7 +8,7 @@ public class PickupPickup : MonoBehaviour {
 	private GameObject player;
 	private Score score;
 	
-	void Awake () {
+	void Start() {
 		player = GameObject.FindGameObjectWithTag("Player");
 		score = player.GetComponent<Score>();
 	}

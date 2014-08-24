@@ -16,7 +16,7 @@ public class Exit : MonoBehaviour {
 	private float bonus;
 	private int bonusPoints;
 
-	void Awake () {
+	void Start() {
 		player = GameObject.FindGameObjectWithTag("Player");
 		score = player.GetComponent<Score>();
 

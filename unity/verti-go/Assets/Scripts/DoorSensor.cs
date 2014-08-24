@@ -7,7 +7,7 @@ public class DoorSensor : MonoBehaviour {
 	private GameObject player;
 	private DoorOpen[] doorsToOpen;
 	
-	void Awake () {
+	void Start() {
 		player = GameObject.FindGameObjectWithTag("Player");
 
 		doorsToOpen = transform.parent.gameObject.GetComponentsInChildren<DoorOpen>();
