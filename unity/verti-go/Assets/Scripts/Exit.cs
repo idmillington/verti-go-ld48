@@ -16,6 +16,9 @@ public class Exit : MonoBehaviour {
 	private float bonus;
 	private int bonusPoints;
 
+	private float timeToExit;
+	private bool exiting;
+
 	void Start() {
 		player = GameObject.FindGameObjectWithTag("Player");
 		score = player.GetComponent<Score>();
@@ -33,22 +36,36 @@ public class Exit : MonoBehaviour {
 	}
 
 	void Update() {
+		if (exiting) UpdateExit();
+		else UpdateBonus();
+	}
+
+	void UpdateExit() {
+		timeToExit -= Time.deltaTime;
+		if (timeToExit <= 0.0f) {
+			score.Win();
+		}
+	}
+
+	void UpdateBonus() {
 		bonus -= Time.deltaTime * bonusDepletionSpeed;
-		if (bonus < 0) bonus = 0;
+		if (bonus <= 0.0f) bonus = 0.0f;
 
 		int newBonusPoints = (int)bonus;
 		if (newBonusPoints != bonusPoints) {
 			// Sound effects for point depletion or exhaustion.
-			if (bonusPoints == 0) {
+			if (newBonusPoints == 0.0f) {
 				if (pointsAllGoneSound) AudioSource.PlayClipAtPoint(pointsAllGoneSound, transform.position);
 			} else {
 				if (pointDepletionSound) AudioSource.PlayClipAtPoint(pointDepletionSound, transform.position);
 			}
 
 			// Update indicator
+			bonusPoints = newBonusPoints;
 			UpdateIndicator();
+		} else {
+			bonusPoints = newBonusPoints;
 		}
-		bonusPoints = newBonusPoints;
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -56,7 +73,8 @@ public class Exit : MonoBehaviour {
 		if (other.gameObject == player) {
 			if (exitSound) AudioSource.PlayClipAtPoint(exitSound, transform.position);
 			score.AddPoints(bonusPoints);
-			score.Win();
+			exiting = true;
+			timeToExit = 6.0f;
 		}
 	}
 }

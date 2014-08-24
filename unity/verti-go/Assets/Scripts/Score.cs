@@ -14,7 +14,7 @@ public class Score : MonoBehaviour {
 	private int score;
 
 	// Use this for initialization
-	void Start () {
+	void Awake() {
 		if (zeroScore) {
 			score = 0;
 			UpdateScore();
