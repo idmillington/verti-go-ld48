@@ -6,6 +6,8 @@ public class Score : MonoBehaviour {
 	public AudioClip winSound;
 
 	public System.String nextLevel = "Game Won";
+	public bool viaLoadingScreen = true;
+
 	public bool zeroScore = false;
 	public GUIText scoreDisplay;
 
@@ -36,12 +38,12 @@ public class Score : MonoBehaviour {
 
 	public void Win() {
 		if (winSound) AudioSource.PlayClipAtPoint(winSound, transform.position);
-		Application.LoadLevel(nextLevel);
+		LoadLevelUtils.LoadLevel(nextLevel, viaLoadingScreen);
 	}
 
 	public void Lose() {
 		if (loseSound) AudioSource.PlayClipAtPoint(loseSound, transform.position);
-		Application.LoadLevel("Game Over");
+		LoadLevelUtils.LoadLevel("Game Over", false);
 	}
 
 }

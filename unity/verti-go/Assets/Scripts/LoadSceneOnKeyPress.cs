@@ -3,10 +3,11 @@ using System.Collections;
 
 public class LoadSceneOnKeyPress : MonoBehaviour {
 	public System.String levelToLoad = "Level One";
+	public bool viaLoadingScreen = true;
 
 	void Update () {
 		if (Input.GetButton("Jump")) {
-			Application.LoadLevel(levelToLoad);
+			LoadLevelUtils.LoadLevel(levelToLoad, viaLoadingScreen);
 		}
 	}
 }
