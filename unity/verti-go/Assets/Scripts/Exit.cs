@@ -74,7 +74,7 @@ public class Exit : MonoBehaviour {
 			if (exitSound) AudioSource.PlayClipAtPoint(exitSound, transform.position);
 			score.AddPoints(bonusPoints);
 			exiting = true;
-			timeToExit = 6.0f;
+			timeToExit = 0.0f;//6.0f;
 		}
 	}
 }
