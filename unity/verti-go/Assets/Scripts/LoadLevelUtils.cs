@@ -10,4 +10,9 @@ public class LoadLevelUtils {
 			Application.LoadLevel(levelToLoad);
 		}
 	}
+
+	public static void WonLevel(System.String levelToLoad) {
+		PlayerPrefs.SetString("Next Level", levelToLoad);
+		Application.LoadLevel("Level Complete");
+	}
 }

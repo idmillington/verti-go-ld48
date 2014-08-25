@@ -38,7 +38,11 @@ public class Score : MonoBehaviour {
 
 	public void Win() {
 		if (winSound) AudioSource.PlayClipAtPoint(winSound, transform.position);
-		LoadLevelUtils.LoadLevel(nextLevel, viaLoadingScreen);
+		if (viaLoadingScreen) {
+			LoadLevelUtils.WonLevel(nextLevel);
+		} else {
+			LoadLevelUtils.LoadLevel(nextLevel, false);
+		}
 	}
 
 	public void Lose() {

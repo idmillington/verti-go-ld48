@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class Exit : MonoBehaviour {
-	public AudioClip exitSound;
 	public AudioClip pointDepletionSound;
 	public AudioClip pointsAllGoneSound;
 
@@ -71,10 +70,9 @@ public class Exit : MonoBehaviour {
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject == player) {
-			if (exitSound) AudioSource.PlayClipAtPoint(exitSound, transform.position);
 			score.AddPoints(bonusPoints);
 			exiting = true;
-			timeToExit = 0.0f;//6.0f;
+			timeToExit = 0.0f;
 		}
 	}
 }

@@ -6,17 +6,17 @@ public class PlatformTurn : MonoBehaviour {
 
 	private float currentAngle;
 	private float targetAngle;
-	private AudioSource audio;
+	private AudioSource turnAudio;
 
 	// Use this for initialization
 	void Start () {
 		currentAngle = targetAngle = 0.0f;
-		audio = gameObject.GetComponent<AudioSource>();
+		turnAudio = gameObject.GetComponent<AudioSource>();
 	}
 
 	public void NextFlip() {
 		targetAngle += 180.0f;
-		audio.Play();
+		turnAudio.Play();
 	}
 	
 	// Update is called once per frame
